@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Softtek</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:growl id="messages" showDetail="false"  >
+                <p:autoUpdate/>
+            </p:growl>
+            <p:fieldset legend="Crear usuario">
+                <h:panelGrid columns="3">
+                    <p:outputLabel for="txtFirstName" value="Nombres:"/>
+                    <p:inputText id="txtFirstName" required="true" value="#{userController.person.firstName}"/>
+                    <p:message for="txtFirstName"/>
+
+                    <p:outputLabel for="txtLastName" value="Apellidos:"/>
+                    <p:inputText id="txtLastName" required="true" value="#{userController.person.lastname}"/>
+                    <p:message for="txtLastName"/>
+
+                    <p:outputLabel for="txtDni" value="Cédula Ciudadania N°:"/>
+                    <p:inputText id="txtDni" required="true" value="#{userController.person.dni}"/>
+                    <p:message for="txtDni"/>
+
+                    <p:outputLabel for="txtUserName" value="Usuario:"/>
+                    <p:inputText id="txtUserName" required="true" value="#{userController.user.userName}"/>
+                    <p:message for="txtUserName"/>
+
+                    <p:outputLabel for="password1" value="Contraseña:"/>
+                    <p:password id="password1" value="#{userController.user.password}" 
+                                match="password2" feedback="true" promptLabel="Ingrese la contraseña."
+                                validatorMessage="Las contraseñas no coinciden." required="true"/>
+                    <p:message for="password1"/>
+
+                    <p:outputLabel for="password2" value="Confirmar contraseña"/>
+                    <p:password id="password2" required="true"/>
+                    <p:message for="password2"/>
+
+                    <p:outputLabel for="rdbPerfil" value="Rol"/>
+                    <p:selectOneRadio id="rdbPerfil" value="#{userController.user.rol}" required="true">
+                        <f:selectItem itemLabel="Administrador" itemValue="administrador"/>
+                        <f:selectItem itemLabel="Operario" itemValue="operario"/>
+                    </p:selectOneRadio>
+                    <p:message for="rdbPerfil"/>
+
+                    <p:commandButton value="Registrar" actionListener="#{userController.createAccount()}"/>
+                    <p:button value="Iniciar Sesión"  href="../index.softtek"/>
+
+                </h:panelGrid>
+            </p:fieldset>
+
+        </h:form>
+    </h:body>
+</html>

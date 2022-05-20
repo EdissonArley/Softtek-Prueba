@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:event type="preRenderView" listener="#{templateController.verifySession()}"/>
+    </h:head>
+    <body>
+
+        <ui:composition template="./../../templates/template.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <p:growl id="messages" showDetail="false"  >
+                        <p:autoUpdate/>
+                    </p:growl>
+                    <p:fieldset id="provider" legend="Registrar Proveedor">
+                        <h:panelGrid columns="2">
+                            <p:outputLabel for="txtUser" value="Nombre"/>
+                            <p:inputText id="txtUser" value="#{providerController.provider.businessName}" required="true" 
+                                         requiredMessage="El nombre proveedor es requerido"/>
+
+                            <p:outputLabel for="txtIdentification" value="Identificación"/>
+                            <p:inputText id="txtIdentification" value="#{providerController.provider.businessIdentification}" required="true"
+                                         requiredMessage="La identificaión proveedor es requerida"/>
+
+                            <p:outputLabel for="txtAdrees" value="Dirección"/>
+                            <p:inputText id="txtAdrees" value="#{providerController.provider.adrees}" required="true"
+                                         requiredMessage="la dirección es requerida"/>
+
+                            <p:outputLabel for="txtEmail" value="Email"/>
+                            <p:inputText id="txtEmail" required="true" label="email" 
+                                         requiredMessage="El email es requerido" validatorMessage="Email invalido"
+                                         value="#{providerController.provider.email}">
+                                <f:validateRegex
+                                    pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                            </p:inputText>
+                            <p:message for="txtEmail" />
+
+                            <p:column/>
+                            <p:commandButton value="Registrar" action="#{providerController.create()}" update="provider"/>
+                        </h:panelGrid>
+                    </p:fieldset>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <h:head>
+        <title>Softtek</title>
+        <h:outputStylesheet library="css" name="index.css"/>
+    </h:head>
+    <h:body id="main">
+        <h:form>
+            <p:growl id="messages" showDetail="false"  >
+                <p:autoUpdate/>
+            </p:growl>
+            <p:panelGrid columns="2">
+                <p:outputLabel for="txtUser" value="Usuario"/>
+                <p:inputText id="txtUser" value="#{loginController.user.userName}" required="true"/>
+
+                <p:outputLabel for="txtPassword" value="Contraseña"/>
+                <p:inputText id="txtPassword" value="#{loginController.user.password}" required="true"/>
+
+                <p:link value="Registrar" outcome="/user/user" />
+                <p:commandButton value="Iniciar Sesión" action="#{loginController.signIn()}"/>
+            </p:panelGrid>
+        </h:form>
+    </h:body>   
+</html>

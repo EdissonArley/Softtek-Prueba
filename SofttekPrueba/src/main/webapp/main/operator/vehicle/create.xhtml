@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:event type="preRenderView" listener="#{templateController.verifySession()}"/>
+    </h:head>
+    <body>
+
+        <ui:composition template="./../../../templates/templateOperator.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <p:growl id="messages" showDetail="false"  >
+                        <p:autoUpdate/>
+                    </p:growl>
+                    <p:fieldset legend="Registrar Vehiculo">
+                        <h:panelGrid columns="2">
+                            <p:outputLabel for="txtPlate" value="Placa:"/>
+                            <p:inputText id="txtPlate"  required="true" value="#{vehicleControler.vehicle.plate}" 
+                                         requiredMessage="La placa es requerida"/>
+
+                            <p:outputLabel for="txtModel" value="Modelo / Año:"/>
+                            <p:inputText id="txtModel"  required="true" value="#{vehicleControler.vehicle.model}"
+                                         requiredMessage="El modelo es requerido"/>
+
+                            <p:outputLabel for="cboBrand" value="Marca:"/>
+                            <p:selectOneMenu id="cboBrand" value="#{vehicleControler.brand.id}">
+                                <f:selectItems value="#{vehicleControler.brandList}" var="brand" itemLabel="#{brand.description}" itemValue="#{brand.id}"/>
+                            </p:selectOneMenu>
+                            
+                            <p:outputLabel for="cboPerson" value="Conductor:"/>
+                            <p:selectOneMenu id="cboPerson" value="#{vehicleControler.person.id}">
+                                <f:selectItems value="#{vehicleControler.personList}" var="person" itemLabel="#{person.dni}" itemValue="#{person.id}"/>
+                            </p:selectOneMenu>
+                            
+                            <p:outputLabel for="cboProveedor" value="Proveedor"/>
+                            <p:selectOneMenu id="cboProveedor" value="#{vehicleControler.provider.id}">
+                                <f:selectItems value="#{vehicleControler.providerList}" var="provider" itemLabel="#{provider.businessName}" itemValue="#{provider.id}"/>
+                            </p:selectOneMenu>
+
+                            <p:commandButton value="Registrar" action="#{vehicleControler.create()}" oncomplete="../list.softtek"/>
+                        </h:panelGrid>
+                    </p:fieldset>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
